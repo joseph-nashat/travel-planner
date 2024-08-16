@@ -80,6 +80,7 @@ def callChatBotV1(q,h=""):
 
 def callChatBotV2(q):
     chain = promptV2 | chat
+    
     res=chain.invoke(
     {
         "messages": [
@@ -90,4 +91,9 @@ def callChatBotV2(q):
             #HumanMessage(content="What did you just say?"),
         ],
     })
+    return res.content
+
+def callChatBotV3(q):
+    chain = promptV2 | chat
+    res=chain.invoke({"messages": q})
     return res.content

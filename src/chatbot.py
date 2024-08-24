@@ -96,4 +96,4 @@ def callChatBotV2(q):
 def callChatBotV3(q):
     chain = promptV2 | chat
     res=chain.invoke({"messages": q})
-    return res.content
+    return res.content2

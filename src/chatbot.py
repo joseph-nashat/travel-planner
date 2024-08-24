@@ -50,17 +50,7 @@ promptV2 = ChatPromptTemplate.from_messages(
                     using a set of question 
                     note you should ask one question at a time and wait for the user response to generate another response
                     in the plan you should consider the weather and suggest any local event and which airport they should talk and any near hotal and try to hightlight the budget of the activitas
-                    [
-                    "Great. What is your departure location ? ",
-                        "And what is yout distination location",
-                        "Greet choise , when are you planning to travel please provied the date in yyyy-mm-dd for better experiance?",
-                        "how long you are ganne to stay ",
-                        "how many paople gonne travel including you",
-                        "Alright , what is the budget for the trip?",
-                        "transporter type you prefere to use in the trip=> car , bus ,...",
-                        "activit types and interests (beach, mountains, culture, adventure, etc.)",
-                        "cuisine type",
-                        "anything alse you want to add a note any kind of activity or anything i should consider"]
+                    {questionList}
                     please rephrase them and generate as much question as you need to have all the data to plan
                     
                     
@@ -70,6 +60,7 @@ promptV2 = ChatPromptTemplate.from_messages(
         MessagesPlaceholder(variable_name="messages"),
     ]
 )
+promptV2 = promptV2.partial(questionList=questionList)
 
 
 
@@ -96,4 +87,5 @@ def callChatBotV2(q):
 def callChatBotV3(q):
     chain = promptV2 | chat
     res=chain.invoke({"messages": q})
-    return res.content2
+    #return res.content
+    return res.content
